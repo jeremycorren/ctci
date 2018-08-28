@@ -21,7 +21,7 @@ Cost of `N` append operations: since each append is `O(1)`, cost of appends in t
 
 `1 + 2 + 4 + . . . + N/2 + N` or `N + N/2 + . . . + 4 + 2 + 1`
 
-To find the sum of this sequence: consider a square of size `N` - now, by combining squares of size `N/2`, `N/4`, etc, we end up with another square of size `N`, hence a sum of `2N`. Then `2N` doubling + `N` for the appends gives `3N`.  We can simplify to `O(N)`, meaning the total cost of `N` appends grows at a linear rate.
+To find the sum of this sequence: consider a square with area `N` - now, by combining squares of size `N/2`, `N/4`, etc, we end up with another square with area slightly less than `N`, hence a sum of `~2N`. Then `2N` doubling + `N` for the appends gives `3N`.  We can simplify to `O(N)`, meaning the total cost of `N` appends grows at a linear rate.
 
 Append, average case - divide cost by frequency:
 
@@ -45,18 +45,12 @@ Above, for each string concatenation, we have to create a new string object and 
 ___
 
 We can optimize by declaring and reusing a string builder outside of the loop, since like a dynamic array, a string builder dynamically resizes its underlying `char` array to give average costant time append.
-```
-buildSentence(str, a):	// O(N)
-  sb = str
-  for s in a:						// O(N)
-    sb.append(s)				// O(1) amortized
-```
-
 ```java
-public static void buildSentence(String str, String[] a) {	// O(N^2)
-	StringBuilder sb = new StringBuilder();
-	for (String s : a) 	// O(N)
- 		sb.append(s); 		// O(N)					
+public static void buildSentence(String str, String[] a) {	// O(N)
+	StringBuilder sb = new StringBuilder(str);
+  	for (String s : a) {	// O(N)
+   	sb.append(s);		// O(1) amortized
+   }
 }
 ```
 
