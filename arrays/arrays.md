@@ -1,14 +1,22 @@
 #### Arrays
 
-Sequence of values stored sequentially in memory.
-1. Lookup: `O(1)` - since we can find `i`th item's address with byte arithmetic and random memory address can be accessed in constant time
-2. Append: `O(1)` - lookup and set value in constant time
-3. Insert: `O(N)` - requires us to copy at most `N` elements and insert them after new item
-3. Delete: `O(N)` - we have to maintain uninterrupted sequence of items in memory for constant time access, so deleting any item other than the last requires us to copy at most N elements and insert to close gap 
+A sequence of values stored sequentially in memory. Good for **lookup** and **append** operations.
+
+#### Static Arrays
+
+Declared with fixed size.
+
+Lookup: `O(1)` - since we can find `i`th item's address with byte arithmetic and random memory address can be accessed in constant time
+
+Append: `O(1)` - lookup and set value in constant time
+
+Insert: `O(N)` - requires us to copy at most `N` elements and insert them after new item
+
+Delete: `O(N)` - we have to maintain uninterrupted sequence of items in memory for constant time access, so deleting any item other than the last requires us to copy at most N elements and insert to close gap 
 
 #### Dynamic Arrays
 
-We can improve arrays, normally of fixed size, to support dynamic resizing.
+We can improve arrays to support dynamic resizing.
 
 Append, worst case: `O(N)` - when array capacity is full, we create a new array of `2N` size.  Then we iterate over new array, copying all `N` elements to it. Finally we set the new array to our old array reference.
 ___
@@ -35,10 +43,10 @@ Consider the delete case. If we half size of array when `N = 1/2` of capacity, w
 Strings are implemented as fixed-size arrays of `char` primitives. Consider performance when growing strings, where `a` is an array of strings:
 
 ```java
-public static void buildSentence(String str, String[] a) {	// O(N^2)
+public static void buildSentence(String str, String[] a) { // O(N^2)
 	for (String s : a) { // O(N)
- 		str += s; 			// O(N)
-  	}												 												
+ 		str += s; // O(N)
+  	}				
 }
 ```
 Above, for each string concatenation, we have to create a new string object and copy over the old `char` values plus the appended string `s` - leading to expensive linear cost for each iteration, and thus quadratic performance for the whole loop. 
@@ -46,10 +54,10 @@ ___
 
 We can optimize by declaring and reusing a string builder outside of the loop, since like a dynamic array, a string builder dynamically resizes its underlying `char` array to give average costant time append.
 ```java
-public static void buildSentence(String str, String[] a) {	// O(N)
+public static void buildSentence(String str, String[] a) { // O(N)
 	StringBuilder sb = new StringBuilder(str);
-  	for (String s : a) {	// O(N)
-   	sb.append(s);		// O(1) amortized
+  	for (String s : a) { // O(N)
+   	sb.append(s); // O(1) amortized
    }
 }
 ```
