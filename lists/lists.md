@@ -1,6 +1,6 @@
 #### Lists
 
-A list is built on `Node` references, where each `Node` stores data as well as a reference to another `Node`:
+A _list_ is a sequence of values consisting of `Node` references, where each `Node` stores data as well as a reference to another `Node`:
 
 ```java
 class Node {
@@ -21,6 +21,10 @@ head = new Node();
 head.data = data;
 head.next = oldHead; //Append list to new head
 ```
+
+Note - a couple of drawbacks to list implementations in spite of perceived advantages:
+1. We have to carry around an extra object reference for each `Node`, i.e. `O(N)` space complexity.
+2. While most list-end ops are `O(1)`, the constant factor for allocating memory can be expensive.
 
 Lookup: `O(N)` - we have to step through the list to find the `k`th `Node`: since `Node` addresses are not contiguously stored, processor cannot take advantage of caching, and so must follow each `next` or `prev` reference to its corresponding address. Thus **iterating through lists is slower than iterating over arrays**
 

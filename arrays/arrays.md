@@ -1,6 +1,8 @@
+A _data structure_ is a concrete representation of a collection that implements operations on data. 
+
 #### Arrays
 
-A sequence of values stored sequentially in memory. Good for **lookup** and **append** operations, but slow **insert** and **delete**.
+An _array_ is a sequence of values stored sequentially in memory. Good for **lookup** and **append** operations, but slow **insert** and **delete**.
 
 #### Static Arrays
 
