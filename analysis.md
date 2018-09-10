@@ -8,9 +8,11 @@ For a given program, `runtime = cost × frequency`.
 In our model, a single operations takes a _constant amount of time_.
 ```java
 public static boolean contains(int[] a, int key) {
-   for (Integer i : a)  // Loop iterates N times: O(N * 1)
-      if (i == key)	   // Each compare takes O(1)
-         return true;
+  for (Integer i : a) { // Loop iterates N times: O(N * 1)
+    if (i == key) { // Each compare takes O(1)
+      return true; 
+    } 
+  }
 }
 ```
 Assume each compare takes 2 ms:
@@ -38,11 +40,13 @@ _Examples_
 
 If chunks of work happen sequentially, **add** their runtimes.
 ```java
-public static void printTwice(int[] a) {  // O(N + N) = O(2N) = O(N)
-   for (Integer i : a)		               // O(N)
-      System.out.println(i);
-   for (Integer j : a)   		            // O(N)
-      System.out.println(j); 			
+public static void printTwice(int[] a) { // O(N + N) = O(2N) = O(N)
+  for (Integer i : a) {// O(N)
+    System.out.println(i);
+  }
+  for (Integer j : a) { // O(N)
+    System.out.println(j); 	
+  }		
 }
 ```
 While `O(2N)` and `O(N)` will give different runtimes, especially at large values, both reflect linear growth with respect to `N` so we represent as just `O(N)`.
@@ -51,10 +55,12 @@ If we had iterated over an array of size `M` and then an array of size `N`, we g
 ___
 
 ```java
-public static void printAllPairs(int[] a) {  // O(N * N) = O(N^2)
-   for (Integer i : a)                       // O(N)
-      for (Integer j : a)                    // O(N)
-         System.out.println(i + "," + j);
+public static void printAllPairs(int[] a) { // O(N * N) = O(N^2)
+  for (Integer i : a) { // O(N)
+    for (Integer j : a) { // O(N)
+      System.out.println(i + "," + j);
+    }
+  }
 }
 ```
 
@@ -63,9 +69,11 @@ ___
 
 ```java
 public static void triangularSeries(int[] a) {  // O(N * (N-1)/2) = O(N^2)
-   for (int i = 0; i < a.length; i++)
-  	   for (int j = i + 1; j < a.length; j++) 
-         System.out.println(a[i] + "," + a[j]);
+  for (int i = 0; i < a.length; i++) {
+    for (int j = i + 1; j < a.length; j++) {
+      System.out.println(a[i] + "," + a[j]);
+    }
+  }
 }
 ```
 Inner loop runs 

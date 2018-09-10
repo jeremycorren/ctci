@@ -1,12 +1,12 @@
 #### Arrays
 
-A sequence of values stored sequentially in memory. Good for **lookup** and **append** operations.
+A sequence of values stored sequentially in memory. Good for **lookup** and **append** operations, but slow **insert** and **delete**.
 
 #### Static Arrays
 
 Declared with fixed size.
 
-Lookup: `O(1)` - since we can find `i`th item's address with byte arithmetic and random memory address can be accessed in constant time
+Lookup: `O(1)` - when accessing an address, processor caches nearby addresses. Since arrays are stored contiguously in memory, we can compute the `i`th item's address in constant time using byte arithmetic - as a result, iteration is also very fast
 
 Append: `O(1)` - lookup and set value in constant time
 
@@ -44,9 +44,9 @@ Strings are implemented as fixed-size arrays of `char` primitives. Consider perf
 
 ```java
 public static void buildSentence(String str, String[] a) { // O(N^2)
-	for (String s : a) { // O(N)
- 		str += s; // O(N)
-  	}				
+  for (String s : a) { // O(N)
+    str += s; // O(N)
+  }				
 }
 ```
 Above, for each string concatenation, we have to create a new string object and copy over the old `char` values plus the appended string `s` - leading to expensive linear cost for each iteration, and thus quadratic performance for the whole loop. 
@@ -55,10 +55,10 @@ ___
 We can optimize by declaring and reusing a string builder outside of the loop, since like a dynamic array, a string builder dynamically resizes its underlying `char` array to give average costant time append.
 ```java
 public static void buildSentence(String str, String[] a) { // O(N)
-	StringBuilder sb = new StringBuilder(str);
-  	for (String s : a) { // O(N)
-   	sb.append(s); // O(1) amortized
-   }
+  StringBuilder sb = new StringBuilder(str);
+  for (String s : a) { // O(N)
+    sb.append(s); // O(1) amortized
+  }
 }
 ```
 
